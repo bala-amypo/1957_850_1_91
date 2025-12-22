@@ -1,35 +1,69 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "categories")
 public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    @Column(nullable = false, unique = true)
+    private String categoryName;
 
-    @OneToMany(mappedBy = "category")
-    private List<Ticket> tickets;
+    private String description;
 
-    public Category() {}
+    @Column(nullable = false)
+    private String defaultUrgency;
+
+    private LocalDateTime createdAt;
+
+    public Category() {
+    }
+
+    public Category(String categoryName, String description, String defaultUrgency) {
+        this.categoryName = categoryName;
+        this.description = description;
+        this.defaultUrgency = defaultUrgency;
+    }
+
+    @PrePersist
+    public void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public String getName() {
-        return name;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDefaultUrgency() {
+        return defaultUrgency;
+    }
+
+    public void setDefaultUrgency(String defaultUrgency) {
+        this.defaultUrgency = defaultUrgency;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 }
