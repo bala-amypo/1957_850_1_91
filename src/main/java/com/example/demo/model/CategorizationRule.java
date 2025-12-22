@@ -29,13 +29,6 @@ public class CategorizationRule {
     public CategorizationRule() {
     }
 
-    public CategorizationRule(Category category, String keyword, String matchType, Integer priority) {
-        this.category = category;
-        this.keyword = keyword;
-        this.matchType = matchType;
-        this.priority = priority;
-    }
-
     @PrePersist
     public void onCreate() {
         this.createdAt = LocalDateTime.now();
