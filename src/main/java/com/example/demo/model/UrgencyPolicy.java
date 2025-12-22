@@ -1,7 +1,6 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "urgency_policies")
@@ -11,6 +10,7 @@ public class UrgencyPolicy {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String policyName;
 
     @Column(nullable = false)
@@ -19,20 +19,7 @@ public class UrgencyPolicy {
     @Column(nullable = false)
     private String urgencyOverride;
 
-    private LocalDateTime createdAt;
-
     public UrgencyPolicy() {
-    }
-
-    public UrgencyPolicy(String policyName, String keyword, String urgencyOverride) {
-        this.policyName = policyName;
-        this.keyword = keyword;
-        this.urgencyOverride = urgencyOverride;
-    }
-
-    @PrePersist
-    public void onCreate() {
-        this.createdAt = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -43,15 +30,23 @@ public class UrgencyPolicy {
         return policyName;
     }
 
+    public void setPolicyName(String policyName) {
+        this.policyName = policyName;
+    }
+
     public String getKeyword() {
         return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
     }
 
     public String getUrgencyOverride() {
         return urgencyOverride;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public void setUrgencyOverride(String urgencyOverride) {
+        this.urgencyOverride = urgencyOverride;
     }
 }
