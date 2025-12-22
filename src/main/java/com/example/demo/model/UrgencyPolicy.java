@@ -1,51 +1,52 @@
-package com.example.demo.service.impl;
+package com.example.demo.model;
 
-import com.example.demo.exception.ResourceNotFoundException;
-import com.example.demo.model.UrgencyPolicy;
-import com.example.demo.repository.UrgencyPolicyRepository;
-import com.example.demo.service.UrgencyPolicyService;
-import org.springframework.stereotype.Service;
+import jakarta.persistence.*;
 
-import java.util.List;
+@Entity
+@Table(name = "urgency_policies")
+public class UrgencyPolicy {
 
-@Service
-class UrgencyPolicyServiceImpl implements UrgencyPolicyService {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    private final UrgencyPolicyRepository policyRepository;
+    @Column(nullable = false)
+    private String policyName;
 
-    UrgencyPolicyServiceImpl(UrgencyPolicyRepository policyRepository) {
-        this.policyRepository = policyRepository;
+    @Column(nullable = false)
+    private String keyword;
+
+    @Column(nullable = false)
+    private String urgencyOverride;
+
+    public UrgencyPolicy() {
     }
 
-    @Override
-    public UrgencyPolicy createPolicy(UrgencyPolicy policy) {
-        return policyRepository.save(policy);
+    public Long getId() {
+        return id;
     }
 
-    @Override
-    public UrgencyPolicy getPolicyById(Long id) {
-        return policyRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Policy not found"));
+    public String getPolicyName() {
+        return policyName;
     }
 
-    @Override
-    public List<UrgencyPolicy> getAllPolicies() {
-        return policyRepository.findAll();
+    public void setPolicyName(String policyName) {
+        this.policyName = policyName;
     }
 
-    @Override
-    public UrgencyPolicy updatePolicy(Long id, UrgencyPolicy policy) {
-        UrgencyPolicy existing = getPolicyById(id);
-
-        existing.setPolicyName(policy.getPolicyName());
-        existing.setKeyword(policy.getKeyword());
-        existing.setUrgencyOverride(policy.getUrgencyOverride());
-
-        return policyRepository.save(existing);
+    public String getKeyword() {
+        return keyword;
     }
 
-    @Override
-    public void deletePolicy(Long id) {
-        policyRepository.delete(getPolicyById(id));
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
+
+    public String getUrgencyOverride() {
+        return urgencyOverride;
+    }
+
+    public void setUrgencyOverride(String urgencyOverride) {
+        this.urgencyOverride = urgencyOverride;
     }
 }
