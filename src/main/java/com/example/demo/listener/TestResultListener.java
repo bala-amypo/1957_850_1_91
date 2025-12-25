@@ -1,28 +1,20 @@
 package com.example.demo.listener;
 
-import org.testng.ITestListener;
-import org.testng.ITestResult;
-
-public class TestResultListener implements ITestListener {
+public class TestResultListener {
     
-    @Override
-    public void onTestStart(ITestResult result) {
-        System.out.println("Test started: " + result.getMethod().getMethodName());
+    public void onTestStart(Object result) {
+        System.out.println("Test started");
     }
     
-    @Override
-    public void onTestSuccess(ITestResult result) {
-        System.out.println("Test passed: " + result.getMethod().getMethodName());
+    public void onTestSuccess(Object result) {
+        System.out.println("Test passed");
     }
     
-    @Override
-    public void onTestFailure(ITestResult result) {
-        System.out.println("Test failed: " + result.getMethod().getMethodName());
-        System.out.println("Failure reason: " + result.getThrowable().getMessage());
+    public void onTestFailure(Object result) {
+        System.out.println("Test failed");
     }
     
-    @Override
-    public void onTestSkipped(ITestResult result) {
-        System.out.println("Test skipped: " + result.getMethod().getMethodName());
+    public void onTestSkipped(Object result) {
+        System.out.println("Test skipped");
     }
 }
