@@ -5,21 +5,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
-import java.io.PrintWriter;
 
-@WebServlet(urlPatterns = "/health")
+@WebServlet("/health")
 public class HealthServlet extends HttpServlet {
-
+    
     @Override
-    protected void doGet(HttpServletRequest request,
-                         HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-
-        response.setContentType("text/plain");
-
-        PrintWriter out = response.getWriter();
-        out.println("Application is running");
+        response.setContentType("application/json");
+        response.getWriter().write("{\"status\":\"UP\"}");
     }
 }
