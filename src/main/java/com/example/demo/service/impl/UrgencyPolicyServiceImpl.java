@@ -10,11 +10,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UrgencyPolicyServiceImpl implements UrgencyPolicyService {
+class UrgencyPolicyServiceImpl implements UrgencyPolicyService {
 
     private final UrgencyPolicyRepository policyRepository;
 
-    public UrgencyPolicyServiceImpl(UrgencyPolicyRepository policyRepository) {
+    UrgencyPolicyServiceImpl(UrgencyPolicyRepository policyRepository) {
         this.policyRepository = policyRepository;
     }
 
